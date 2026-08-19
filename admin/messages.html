@@ -1,0 +1,69 @@
+<!-- Path: admin/messages.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Admin - Messages</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Password Gate (UI convenience only — see note near checkAdminPass below) -->
+    <div id="adminGate" class="auth-container" style="background: var(--bg-dark); position: fixed; z-index: 999; width: 100%; height: 100%;">
+        <div class="glass-card" style="width: 100%; max-width: 300px; text-align: center;">
+            <h3>Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Code">
+            <button onclick="checkAdminPass()" class="btn btn-primary">Enter</button>
+            <p id="gateErr" style="color: var(--error); margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <div class="admin-grid">
+        <aside class="admin-sidebar">
+            <h2 style="color: var(--accent);">ADMIN</h2>
+            <hr style="border: 0.5px solid #333; margin: 20px 0;">
+            <a href="dashboard.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">User Management</a>
+            <a href="rooms.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">Room Requests</a>
+            <a href="messages.html" class="btn btn-primary" style="margin-bottom: 10px;">Messages</a>
+            <a href="broadcast.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">Broadcast</a>
+            <a href="../moderator/dashboard.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">Mod Panel</a>
+            <a href="../home.html" class="btn btn-outline" style="color:white; border-color:#333;">Exit</a>
+        </aside>
+
+        <main style="padding: 30px; overflow-y: auto;">
+            <h1>Private Conversations</h1>
+            <p style="color: var(--text-gray); font-size: 0.85rem; margin-bottom: 16px;">
+                <i class="fas fa-circle-info"></i> Read-only oversight for moderation. Make sure your Privacy Policy
+                discloses that admins can review private messages.
+            </p>
+            <div class="admin-card" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 240px;">
+                    <h4 style="margin-bottom: 10px; color: var(--text-gray); font-size: 0.8rem; text-transform: uppercase;">Conversations</h4>
+                    <div id="chatListPanel"></div>
+                </div>
+                <div style="flex: 2; min-width: 280px; border-left: 1px solid #222; padding-left: 20px;">
+                    <h4 id="threadTitle" style="margin-bottom: 10px; color: var(--text-gray); font-size: 0.8rem; text-transform: uppercase;">Select a conversation</h4>
+                    <div id="threadPanel" style="max-height: 500px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="../js/admin-messages.js"></script>
+    <script>
+        // NOTE: UI convenience gate only, visible via page source — NOT real
+        // security. Actual access control happens in js/admin-messages.js
+        // (requireRole) and must be backed by Firestore Security Rules.
+        function checkAdminPass() {
+            const pass = document.getElementById('adminPassInput').value;
+            if(pass === "123qwe") {
+                document.getElementById('adminGate').style.display = 'none';
+            } else {
+                document.getElementById('gateErr').innerText = "Wrong Code!";
+            }
+        }
+    </script>
+</body>
+</html>

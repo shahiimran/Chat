@@ -1,0 +1,117 @@
+<!-- Path: admin/broadcast.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Admin - Broadcast</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .bc-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .bc-tab { padding: 8px 16px; border-radius: 8px; border: 1px solid #333; background: transparent; color: var(--text-gray); cursor: pointer; font-family: inherit; font-size: 0.88rem; }
+        .bc-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+        .bc-panel { display: none; }
+        .bc-panel.active { display: block; }
+        .user-pick-row { display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid #222; font-size: 0.88rem; }
+    </style>
+</head>
+<body>
+    <!-- Password Gate (UI convenience only — see note near checkAdminPass below) -->
+    <div id="adminGate" class="auth-container" style="background: var(--bg-dark); position: fixed; z-index: 999; width: 100%; height: 100%;">
+        <div class="glass-card" style="width: 100%; max-width: 300px; text-align: center;">
+            <h3>Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Code">
+            <button onclick="checkAdminPass()" class="btn btn-primary">Enter</button>
+            <p id="gateErr" style="color: var(--error); margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <div class="admin-grid">
+        <aside class="admin-sidebar">
+            <h2 style="color: var(--accent);">ADMIN</h2>
+            <hr style="border: 0.5px solid #333; margin: 20px 0;">
+            <a href="dashboard.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">User Management</a>
+            <a href="rooms.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">Room Requests</a>
+            <a href="messages.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">Messages</a>
+            <a href="broadcast.html" class="btn btn-primary" style="margin-bottom: 10px;">Broadcast</a>
+            <a href="../moderator/dashboard.html" class="btn btn-outline" style="color:var(--accent); border-color:var(--accent); margin-bottom:10px;">Mod Panel</a>
+            <a href="../home.html" class="btn btn-outline" style="color:white; border-color:#333;">Exit</a>
+        </aside>
+
+        <main style="padding: 30px; overflow-y: auto;">
+            <h1>Broadcast</h1>
+            <p style="color: var(--text-gray); font-size: 0.85rem; margin-bottom: 20px;">
+                Send an announcement into every chat room, or as a notification to all users or a chosen few.
+            </p>
+
+            <div class="bc-tabs">
+                <button class="bc-tab active" data-tab="rooms">📢 To All Rooms</button>
+                <button class="bc-tab" data-tab="notif">🔔 As Notification</button>
+            </div>
+
+            <!-- Broadcast into every chat room -->
+            <div class="bc-panel active" id="panel-rooms">
+                <div class="admin-card">
+                    <div id="roomsBcNotice" class="status-msg hidden"></div>
+                    <textarea id="roomsBcText" maxlength="300" rows="3" placeholder="Announcement text..." style="width:100%; padding:13px 14px; background:var(--bg-input); border:1px solid #2a3140; color:white; border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; resize:vertical; box-sizing:border-box;"></textarea>
+                    <p style="color: var(--text-gray); font-size: 0.78rem; margin: 8px 0;">Posted into Global Chat + every approved room, marked as an Announcement.</p>
+                    <button id="sendRoomsBc" class="btn btn-primary" style="width: auto;"><span class="btn-label">Send to All Rooms</span></button>
+                </div>
+            </div>
+
+            <!-- Broadcast as a notification -->
+            <div class="bc-panel" id="panel-notif">
+                <div class="admin-card">
+                    <div id="notifBcNotice" class="status-msg hidden"></div>
+                    <textarea id="notifBcText" maxlength="200" rows="3" placeholder="Notification text..." style="width:100%; padding:13px 14px; background:var(--bg-input); border:1px solid #2a3140; color:white; border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; resize:vertical; box-sizing:border-box;"></textarea>
+
+                    <div style="margin: 14px 0;">
+                        <label style="margin-right: 16px; font-size: 0.88rem;"><input type="radio" name="notifTarget" value="all" checked> All Users</label>
+                        <label style="font-size: 0.88rem;"><input type="radio" name="notifTarget" value="chosen"> Choose Specific Users</label>
+                    </div>
+
+                    <div id="userPickerWrap" class="hidden">
+                        <input type="text" id="userPickSearch" placeholder="Search username..." style="margin-bottom: 8px;">
+                        <div id="userPickList" style="max-height: 220px; overflow-y: auto; border: 1px solid #222; border-radius: 8px;"></div>
+                        <p style="color: var(--text-gray); font-size: 0.78rem; margin-top: 6px;"><span id="chosenCount">0</span> selected</p>
+                    </div>
+
+                    <button id="sendNotifBc" class="btn btn-primary" style="width: auto; margin-top: 10px;"><span class="btn-label">Send Notification</span></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="../js/admin-broadcast.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.bc-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.bc-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.bc-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+            });
+        });
+        document.querySelectorAll('input[name="notifTarget"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('userPickerWrap').classList.toggle('hidden', radio.value !== 'chosen' || !radio.checked);
+            });
+        });
+
+        // NOTE: UI convenience gate only, visible via page source — NOT real
+        // security. Actual access control happens in js/admin-broadcast.js
+        // (requireRole) and must be backed by Firestore Security Rules.
+        function checkAdminPass() {
+            const pass = document.getElementById('adminPassInput').value;
+            if(pass === "123qwe") {
+                document.getElementById('adminGate').style.display = 'none';
+            } else {
+                document.getElementById('gateErr').innerText = "Wrong Code!";
+            }
+        }
+    </script>
+</body>
+</html>
