@@ -1,0 +1,60 @@
+/* Path: css/profile.css */
+.profile-header {
+    text-align: center;
+    padding: 40px 0;
+    background: linear-gradient(to bottom, var(--accent-glow), transparent);
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.avatar-main {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    object-fit: cover;
+    margin-bottom: 15px;
+    background: #000;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.stat-item { text-align: center; }
+.stat-item b { display: block; font-size: 1.2rem; color: var(--accent); }
+
+.bio-box {
+    background: var(--glass);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-top: 20px;
+}
+
+/* Avatar Selector Grid for Edit Page */
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.avatar-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.avatar-option.selected { border-color: var(--accent); }
+
+@media (max-width: 380px) {
+    .avatar-grid { grid-template-columns: repeat(3, 1fr); }
+    .avatar-main { width: 100px; height: 100px; }
+    .profile-stats { gap: 20px; }
+}

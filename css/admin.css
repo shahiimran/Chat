@@ -1,0 +1,60 @@
+/* Path: css/admin.css */
+.admin-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    height: 100vh;
+}
+
+.admin-sidebar {
+    background: #05070a;
+    border-right: 1px solid #222;
+    padding: 20px;
+}
+
+.admin-card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.badge-red { background: var(--error); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+.badge-blue { background: var(--accent); color: black; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+
+.user-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #222;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        min-height: 100vh;
+    }
+    .admin-sidebar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 14px;
+        border-right: none;
+        border-bottom: 1px solid #222;
+        white-space: nowrap;
+    }
+    .admin-sidebar h2 { display: none; }
+    .admin-sidebar hr { display: none; }
+    .admin-sidebar a {
+        width: auto !important;
+        margin-bottom: 0 !important;
+        padding: 10px 16px !important;
+        flex-shrink: 0;
+    }
+    .admin-grid > main { padding: 20px 16px !important; }
+}

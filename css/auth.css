@@ -1,0 +1,91 @@
+/* Path: css/auth.css */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    animation: slideUp 0.5s ease;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.auth-header i.auth-icon {
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+}
+
+.auth-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.auth-header p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.status-msg {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+    font-size: 0.87rem;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+.error-msg { background: rgba(255, 75, 43, 0.1); border: 1px solid var(--error); color: #ff8368; }
+.success-msg { background: rgba(0, 230, 118, 0.1); border: 1px solid var(--success); color: #5cf0a4; }
+
+.auth-footer-link {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 0.88rem;
+    color: var(--text-gray);
+}
+.auth-footer-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.auth-footer-link a:hover { text-decoration: underline; }
+
+.auth-secondary-link {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+.auth-secondary-link a { color: var(--text-gray); text-decoration: none; }
+.auth-secondary-link a:hover { color: var(--text-white); }
+
+.landing-icon {
+    font-size: 3.2rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 20px var(--accent-glow));
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 420px) {
+    .auth-card { padding: 20px; }
+}
