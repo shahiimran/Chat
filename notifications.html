@@ -1,0 +1,35 @@
+<!-- Path: notifications.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Notifications</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Home</a>
+        </header>
+
+        <div class="notif-header-row">
+            <h2>Notifications</h2>
+            <button id="markAllReadBtn" class="btn btn-outline" style="width: auto; padding: 8px 14px; font-size: 0.85rem;">Mark all read</button>
+        </div>
+
+        <div class="glass-card" style="padding: 0; overflow: hidden;">
+            <div id="notificationList"></div>
+            <p id="notifEmpty" class="hidden" style="color: var(--text-gray); text-align: center; padding: 40px 20px;">
+                <i class="fas fa-bell-slash" style="font-size: 1.8rem; display: block; margin-bottom: 10px;"></i>
+                No notifications yet.
+            </p>
+        </div>
+    </div>
+
+    <script type="module" src="js/notifications.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

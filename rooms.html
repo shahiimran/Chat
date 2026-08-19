@@ -1,0 +1,31 @@
+<!-- Path: rooms.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Rooms</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Home</a>
+            <h2 style="margin: 0;">Rooms</h2>
+            <a href="create-room.html" style="color: var(--accent); text-decoration: none; font-size: 1.2rem;"><i class="fas fa-plus"></i></a>
+        </header>
+
+        <div class="glass-card" style="padding: 0;">
+            <div id="roomsList"></div>
+        </div>
+
+        <a href="create-room.html" class="btn btn-outline" style="margin-top: 16px; text-decoration: none;">
+            <i class="fas fa-plus"></i>&nbsp; Request a New Room
+        </a>
+    </div>
+
+    <script type="module" src="js/rooms.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

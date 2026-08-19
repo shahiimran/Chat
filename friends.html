@@ -1,0 +1,36 @@
+<!-- Path: friends.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Friends List</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0; display: flex; justify-content: space-between; align-items: center;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Home</a>
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <a href="requests.html" style="color: var(--accent); text-decoration: none;">Requests <span id="reqBadge" style="background: var(--error); color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.7rem; display: none;">0</span></a>
+                <a href="notifications.html" class="notif-bell" style="width: 36px; height: 36px; font-size: 1rem;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notif-badge">0</span>
+                </a>
+            </div>
+        </header>
+
+        <h2 style="margin-bottom: 20px;">My Sky Friends</h2>
+        
+        <div id="friendsList" class="glass-card">
+            <p style="color: var(--text-gray);">Looking for friends in the stars...</p>
+        </div>
+    </div>
+
+    <script type="module" src="js/friends.js"></script>
+    <script type="module" src="js/notifications.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

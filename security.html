@@ -1,0 +1,31 @@
+<!-- Path: security.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Security</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="settings.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Settings</a>
+            <h2 style="margin-top: 10px;">Security</h2>
+        </header>
+
+        <div class="glass-card">
+            <h3>Password</h3>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin: 10px 0;">Want to change your password? We will send you a link.</p>
+            <button id="securityResetPass" class="btn btn-outline" style="border: 1px solid var(--accent); color: var(--accent);">Send Reset Email</button>
+
+            <hr style="border: 0.5px solid #222; margin: 30px 0;">
+
+            <h3>Danger Zone</h3>
+            <p style="color: var(--error); font-size: 0.9rem; margin: 10px 0;">This will permanently delete your Sky Chat account.</p>
+            <button id="deleteAccountBtn" class="btn" style="background: var(--error); color: white;">Delete My Account</button>
+        </div>
+    </div>
+    <script type="module" src="js/settings.js"></script>
+</body>
+</html>

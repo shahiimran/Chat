@@ -1,0 +1,35 @@
+<!-- Path: chat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Global Room</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; padding: 15px 0;">
+            <a href="home.html" id="backLink" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Back</a>
+            <h3 id="roomTitle"># Global-Chat</h3>
+            <span></span>
+        </header>
+
+        <div class="chat-container glass-card">
+            <div id="messagesDisplay" class="messages-display">
+                <!-- Messages pop up here -->
+            </div>
+
+            <form id="chatForm" class="chat-input-form">
+                <input type="text" id="msgInput" placeholder="Write a message..." autocomplete="off" required>
+                <button type="submit" class="btn btn-primary" style="width: auto;">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/chat.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

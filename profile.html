@@ -1,0 +1,44 @@
+<!-- Path: profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | My Profile</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Home</a>
+        </header>
+
+        <div class="glass-card">
+            <div class="profile-header">
+                <img id="displayAvatar" src="https://ui-avatars.com/api/?name=User&background=00d2ff&color=000" class="avatar-main">
+                <h2 id="displayUsername">Loading...</h2>
+                <p id="displayStatus" style="color: var(--text-gray);">Online</p>
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-item"><b id="countFriends">0</b><span>Friends</span></div>
+                <div class="stat-item"><b>Global</b><span>Rank</span></div>
+            </div>
+
+            <div class="bio-box">
+                <h4>About Me</h4>
+                <p id="displayBio" style="color: var(--text-gray); margin-top: 10px;">This user hasn't written a bio yet.</p>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <a href="edit-profile.html" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/profile.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

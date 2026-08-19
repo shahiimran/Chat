@@ -1,0 +1,134 @@
+<!-- Path: user-profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | User Profile</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="discover.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Discover</a>
+        </header>
+
+        <div class="glass-card">
+            <div class="profile-header">
+                <img id="displayAvatar" src="https://ui-avatars.com/api/?name=User&background=00d2ff&color=000" class="avatar-main">
+                <h2 id="displayUsername">Loading...</h2>
+                <p id="displayStatus" style="color: var(--text-gray);"></p>
+            </div>
+
+            <div class="bio-box">
+                <h4>About Me</h4>
+                <p id="displayBio" style="color: var(--text-gray); margin-top: 10px;">Loading...</p>
+            </div>
+
+            <div id="actionArea" style="margin-top: 30px;">
+                <button id="addFriendBtn" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add Friend</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { doc, getDoc, addDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUid = urlParams.get('uid');
+        const actionArea = document.getElementById('actionArea');
+        const addFriendBtn = document.getElementById('addFriendBtn');
+
+        if (!targetUid) {
+            document.getElementById('displayUsername').innerText = "No user specified";
+        }
+
+        onAuthStateChanged(auth, async (currentUser) => {
+            if (!currentUser) {
+                window.location.href = "login.html";
+                return;
+            }
+            if (!targetUid) return;
+
+            if (targetUid === currentUser.uid) {
+                // Viewing your own profile through this link -> send to the real profile page
+                window.location.href = "profile.html";
+                return;
+            }
+
+            // Load target user's data directly by document ID (uid IS the doc id)
+            const targetSnap = await getDoc(doc(db, "users", targetUid));
+            if (!targetSnap.exists()) {
+                document.getElementById('displayUsername').innerText = "User not found";
+                document.getElementById('displayBio').innerText = "";
+                actionArea.classList.add('hidden');
+                return;
+            }
+
+            const targetData = targetSnap.data();
+            document.getElementById('displayUsername').innerText = targetData.username;
+            document.getElementById('displayStatus').innerText = targetData.status || "Sky Traveler";
+            document.getElementById('displayBio').innerText = targetData.bio || "This user hasn't written a bio yet.";
+            document.getElementById('displayAvatar').src = targetData.avatar || "https://ui-avatars.com/api/?name=" + encodeURIComponent(targetData.username) + "&background=00d2ff&color=000";
+
+            if (targetData.isBanned) {
+                actionArea.innerHTML = `<p style="color: var(--error); text-align:center;">This account is unavailable.</p>`;
+                return;
+            }
+
+            // Check if a friend request already exists between these two users
+            const existingQ = query(
+                collection(db, "friendRequests"),
+                where("from", "==", currentUser.uid),
+                where("to", "==", targetUid)
+            );
+            const existingSnap = await getDocs(existingQ);
+            if (!existingSnap.empty) {
+                addFriendBtn.disabled = true;
+                addFriendBtn.querySelector ? null : null;
+                addFriendBtn.innerHTML = "Request Sent";
+            }
+
+            addFriendBtn.onclick = async () => {
+                addFriendBtn.disabled = true;
+                addFriendBtn.innerHTML = `<span class="spinner"></span> Sending...`;
+
+                try {
+                    // Fetch my own username directly (doc ID = my uid)
+                    const mySnap = await getDoc(doc(db, "users", currentUser.uid));
+                    const myName = mySnap.exists() ? mySnap.data().username : "Someone";
+
+                    await addDoc(collection(db, "friendRequests"), {
+                        from: currentUser.uid,
+                        fromName: myName,
+                        to: targetUid,
+                        status: "pending",
+                        timestamp: new Date()
+                    });
+
+                    // Create a notification for the recipient
+                    await addDoc(collection(db, "notifications"), {
+                        to: targetUid,
+                        type: "friend_request",
+                        text: `${myName} sent you a friend request.`,
+                        link: "requests.html",
+                        read: false,
+                        createdAt: new Date()
+                    });
+
+                    addFriendBtn.innerHTML = "Request Sent";
+                } catch (err) {
+                    addFriendBtn.disabled = false;
+                    addFriendBtn.innerHTML = "Add Friend";
+                    alert(err.message || "Couldn't send request. Try again.");
+                }
+            };
+        });
+    </script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

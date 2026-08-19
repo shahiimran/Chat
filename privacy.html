@@ -1,0 +1,39 @@
+<!-- Path: privacy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Privacy Settings</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="settings.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Settings</a>
+            <h2 style="margin-top: 10px;">Privacy</h2>
+        </header>
+
+        <div class="glass-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <div>
+                    <h4 style="margin: 0;">Show Email</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-gray);">Allow others to see your email address</p>
+                </div>
+                <input type="checkbox" id="showEmailToggle" style="width: 40px; margin: 0;">
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <div>
+                    <h4 style="margin: 0;">Private Profile</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-gray);">Only friends can view your full profile</p>
+                </div>
+                <input type="checkbox" id="privateProfileToggle" style="width: 40px; margin: 0;">
+            </div>
+
+            <button id="savePrivacy" class="btn btn-primary">Save Privacy Settings</button>
+        </div>
+    </div>
+    <script type="module" src="js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- Path: discover.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Discover</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Home</a>
+            <h2 style="margin-top: 10px;">Discover People</h2>
+        </header>
+
+        <div class="glass-card">
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="searchInput" placeholder="Search by username..." style="flex: 1; min-width: 0;">
+                <button id="searchBtn" class="btn btn-primary" style="width: auto; flex-shrink: 0;">Search</button>
+            </div>
+            
+            <div id="results" style="margin-top: 20px;">
+                <!-- Search results appear here -->
+            </div>
+        </div>
+
+        <h4 id="rankedTitle" style="margin: 24px 0 10px; color: var(--text-gray); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Top Members</h4>
+        <div class="glass-card" id="rankedCard" style="padding: 0;">
+            <div id="rankedList"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/search.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

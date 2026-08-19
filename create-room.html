@@ -1,0 +1,51 @@
+<!-- Path: create-room.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Request a Room</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="glass-card auth-card">
+            <div class="auth-header">
+                <i class="fas fa-hashtag auth-icon"></i>
+                <h2>Request a Room</h2>
+                <p>An admin will review your request before it goes live</p>
+            </div>
+
+            <div id="createRoomNotice" class="status-msg hidden"></div>
+
+            <form id="createRoomForm" novalidate>
+                <div class="field-group">
+                    <label for="roomName">Room Name</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-hashtag field-icon"></i>
+                        <input type="text" id="roomName" placeholder="e.g. movie-night" minlength="3" maxlength="30" required>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="roomDescription">What's it about?</label>
+                    <textarea id="roomDescription" maxlength="120" rows="3" placeholder="A short description..." style="width:100%; padding:13px 14px; background:var(--bg-input); border:1px solid #2a3140; color:white; border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; resize:vertical; box-sizing:border-box;"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="createRoomBtn" style="margin-top: 10px;">
+                    <span class="btn-label">Send Request</span>
+                </button>
+            </form>
+
+            <div class="auth-footer-link">
+                <a href="rooms.html">Back to Rooms</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/rooms.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!-- Path: login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Login</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="glass-card auth-card">
+            <div class="auth-header">
+                <i class="fas fa-user-lock auth-icon"></i>
+                <h2>Welcome Back</h2>
+                <p>Login to your Sky account</p>
+            </div>
+
+            <div id="loginNotice" class="status-msg hidden"></div>
+
+            <form id="loginForm" novalidate>
+                <div class="field-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-envelope field-icon"></i>
+                        <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+                    <div class="field-hint" id="loginEmailHint"></div>
+                </div>
+
+                <div class="field-group">
+                    <label for="loginPass">Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock field-icon"></i>
+                        <input type="password" id="loginPass" placeholder="Enter your password" autocomplete="current-password" required>
+                        <button type="button" class="toggle-pass" data-target="loginPass"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="loginSubmitBtn" style="margin-top: 10px;">
+                    <span class="btn-label">Login</span>
+                </button>
+            </form>
+
+            <div class="auth-secondary-link">
+                <a href="forgot-password.html">Forgot Password?</a>
+            </div>
+            <div class="auth-footer-link">
+                New user? <a href="register.html">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

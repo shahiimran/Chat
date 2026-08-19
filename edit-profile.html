@@ -1,0 +1,57 @@
+<!-- Path: edit-profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Edit Profile</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="profile.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Profile</a>
+            <h2 style="margin-top: 10px;">Edit Profile</h2>
+        </header>
+
+        <div id="editNotice" class="status-msg hidden"></div>
+
+        <form id="editForm" class="glass-card" novalidate>
+            <h4 style="margin-bottom: 12px; color: var(--text-gray); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Choose Avatar</h4>
+            <div class="avatar-grid" id="avatarPicker"></div>
+
+            <div class="field-group">
+                <label for="editUsername">Username</label>
+                <div class="input-wrap">
+                    <i class="fas fa-at field-icon"></i>
+                    <input type="text" id="editUsername" minlength="3" maxlength="20" required>
+                </div>
+                <div class="field-hint" id="usernameHint"></div>
+            </div>
+
+            <div class="field-group">
+                <label for="editStatus">Status</label>
+                <div class="input-wrap">
+                    <i class="fas fa-signature field-icon"></i>
+                    <input type="text" id="editStatus" placeholder="e.g. Sky Traveler" maxlength="40">
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="editBio">Bio</label>
+                <textarea id="editBio" maxlength="160" rows="3" placeholder="Tell others about yourself..." style="width:100%; padding:13px 14px; background:var(--bg-input); border:1px solid #2a3140; color:white; border-radius:var(--radius-sm); font-family:inherit; font-size:0.95rem; resize:vertical; box-sizing:border-box;"></textarea>
+                <div class="field-hint" id="bioCount">0 / 160</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="editSubmitBtn" style="margin-top: 10px;">
+                <span class="btn-label">Save Changes</span>
+            </button>
+        </form>
+    </div>
+
+    <script type="module" src="js/profile.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

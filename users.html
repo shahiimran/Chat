@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Global Community</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .user-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .user-card {
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .user-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .user-card h4 {
+            margin: 10px 0;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Back Button -->
+        <header style="padding: 20px 0; display: flex; align-items: center; gap: 15px;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none; font-size: 1.2rem;">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2 style="margin: 0;">Sky Community</h2>
+        </header>
+
+        <!-- Search Info -->
+        <p style="color: var(--text-gray); font-size: 0.8rem; margin-bottom: 20px;">
+            Discover users currently under the sky.
+        </p>
+
+        <!-- Grid Container for Users -->
+        <div id="userGrid" class="user-grid">
+            <p style="color: var(--text-gray);">Looking for stars...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 1. Protect the page (Only logged in users see this)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadAllUsers();
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        async function loadAllUsers() {
+            const container = document.getElementById('userGrid');
+            
+            try {
+                const snap = await getDocs(collection(db, "users"));
+                container.innerHTML = ""; // Clear "Loading" text
+
+                if (snap.empty) {
+                    container.innerHTML = "<p>No users found yet.</p>";
+                    return;
+                }
+
+                snap.forEach(doc => {
+                    const user = doc.data();
+                    
+                    // Special Check for "Louris" effect
+                    const isLouris = (user.username === "Louris");
+                    
+                    container.innerHTML += `
+                        <div class="glass-card user-card ${isLouris ? 'louris-msg' : ''}">
+                            <img src="${user.avatar || 'https://ui-avatars.com/api/?name='+user.username}" 
+                                 class="user-avatar" 
+                                 alt="avatar">
+                            <h4 class="${isLouris ? 'louris-name' : ''}">${user.username}</h4>
+                            <a href="user-profile.html?uid=${user.uid}" 
+                               class="btn btn-primary" 
+                               style="font-size: 0.7rem; padding: 6px; width: 100%;">
+                               View Profile
+                            </a>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error loading users:", error);
+                container.innerHTML = "<p style='color:red;'>Error loading user list.</p>";
+            }
+        }
+    </script>
+</body>
+</html>

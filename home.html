@@ -1,0 +1,126 @@
+<!-- Path: home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Home</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .layout { display: flex; height: 100vh; }
+        .sidebar { width: 260px; background: var(--bg-card); border-right: 1px solid #222; padding: 20px; flex-shrink: 0; }
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
+        .nav-link {
+            display: flex; align-items: center; gap: 15px; padding: 12px;
+            color: var(--text-gray); text-decoration: none; border-radius: 8px; margin-bottom: 5px;
+        }
+        .nav-link:hover, .nav-link.active { background: var(--accent); color: #000; }
+        .stat-card { background: var(--glass); padding: 20px; border-radius: 12px; border: 1px solid #333; }
+
+        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; gap: 12px; }
+        .dash-header h1 { font-size: 1.6rem; }
+
+        #menuToggle {
+            display: none; background: var(--glass); border: 1px solid var(--border-subtle);
+            color: var(--text-white); font-size: 1.1rem; cursor: pointer;
+            width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+            align-items: center; justify-content: center;
+        }
+        .sidebar-backdrop { display: none; }
+
+        @media (max-width: 768px) {
+            .layout { height: auto; min-height: 100vh; }
+            .sidebar {
+                position: fixed; top: 0; left: -280px; height: 100vh; width: 260px;
+                z-index: 250; transition: left 0.25s ease; overflow-y: auto;
+            }
+            .sidebar.open { left: 0; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+            .sidebar-backdrop.open {
+                display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200;
+            }
+            .main-content { padding: 20px 16px; }
+            #menuToggle { display: inline-flex; }
+            .dash-header { margin-bottom: 26px; }
+            .dash-header h1 { font-size: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <h2 style="color: var(--accent); margin-bottom: 30px;"><i class="fas fa-cloud-moon"></i> Sky Chat</h2>
+            <nav>
+                <a href="home.html" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="chat.html" class="nav-link"><i class="fas fa-globe"></i> Global Chat</a>
+                <a href="rooms.html" class="nav-link"><i class="fas fa-hashtag"></i> Rooms</a>
+                <a href="discover.html" class="nav-link"><i class="fas fa-compass"></i> Discover</a>
+                <a href="dm.html" class="nav-link"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="friends.html" class="nav-link"><i class="fas fa-user-friends"></i> Friends</a>
+                <hr style="border: 0.5px solid #333; margin: 20px 0;">
+                <a href="profile.html" class="nav-link"><i class="fas fa-user-circle"></i> My Profile</a>
+                <a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+                <a href="#" id="logoutBtn" class="nav-link" style="color: var(--error);"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="main-content">
+            <header class="dash-header">
+                <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+                    <button id="menuToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+                    <h1 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Welcome, <span id="userNameDisplay" style="color: var(--accent);">...</span>!</h1>
+                </div>
+                <div style="display: flex; align-items: center; gap: 14px; flex-shrink: 0;">
+                    <a href="notifications.html" class="notif-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notif-badge">0</span>
+                    </a>
+                    <div id="userAvatar" style="width: 45px; height: 45px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold; flex-shrink: 0;">?</div>
+                </div>
+            </header>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div class="stat-card">
+                    <h3>Global Chat</h3>
+                    <p style="color: var(--text-gray);">Talk to everyone online</p>
+                    <a href="chat.html" class="btn btn-primary" style="margin-top: 15px; width: auto;">Enter Room</a>
+                </div>
+                <div class="stat-card">
+                    <h3>Find Friends</h3>
+                    <p style="color: var(--text-gray);">Search for new users</p>
+                    <a href="discover.html" class="btn btn-outline" style="margin-top: 15px; width: auto; border: 1px solid var(--accent); color: var(--accent);">Discover</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/user.js"></script>
+    <script type="module" src="js/notifications.js"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const menuToggle = document.getElementById('menuToggle');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            backdrop.classList.add('open');
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('open');
+        }
+
+        if (menuToggle) menuToggle.addEventListener('click', openSidebar);
+        if (backdrop) backdrop.addEventListener('click', closeSidebar);
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+    </script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

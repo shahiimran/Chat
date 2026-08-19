@@ -1,0 +1,70 @@
+<!-- Path: settings.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Settings</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="home.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Home</a>
+            <h2 style="margin-top: 10px;">Settings</h2>
+        </header>
+
+        <div class="glass-card" style="padding: 0;">
+            <a href="edit-profile.html" class="nav-item-link">
+                <i class="fas fa-user-edit"></i>
+                <span>Edit Profile</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            <a href="privacy.html" class="nav-item-link">
+                <i class="fas fa-user-shield"></i>
+                <span>Privacy</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            <a href="security.html" class="nav-item-link">
+                <i class="fas fa-lock"></i>
+                <span>Account Security</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            <a href="notifications.html" class="nav-item-link">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            <a href="about.html" class="nav-item-link">
+                <i class="fas fa-info-circle"></i>
+                <span>About Sky Chat</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            <div id="settingsLogout" class="nav-item-link" style="color: var(--error); cursor: pointer; border-bottom: none;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .nav-item-link {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #222;
+            transition: 0.2s;
+        }
+        .nav-item-link:hover { background: rgba(255,255,255,0.05); }
+        .nav-item-link i:first-child { width: 30px; color: var(--accent); }
+        .nav-item-link span { flex: 1; }
+        .nav-item-link i:last-child { font-size: 0.8rem; color: #444; }
+    </style>
+
+    <script type="module" src="js/settings.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

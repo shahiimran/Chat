@@ -1,0 +1,38 @@
+<!-- Path: conversation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Private Conversation</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; align-items: center; padding: 15px 0; gap: 15px;">
+            <a href="dm.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-chevron-left"></i></a>
+            <img id="chatAvatar" src="" style="width: 40px; height: 40px; border-radius: 50%; background: #000; object-fit: cover; flex-shrink: 0;">
+            <div style="min-width: 0;">
+                <h4 id="chatName" style="margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Friend Name</h4>
+                <span id="chatStatus" style="font-size: 0.75rem; color: var(--text-gray);"></span>
+            </div>
+        </header>
+
+        <div class="chat-container glass-card">
+            <div id="privateMessages" class="messages-display">
+                <!-- Private messages appear here -->
+            </div>
+
+            <form id="privateForm" class="chat-input-form">
+                <input type="text" id="pMsgInput" placeholder="Send a secret message..." autocomplete="off" required>
+                <button type="submit" class="btn btn-primary" style="width: auto;">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/dm.js"></script>
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

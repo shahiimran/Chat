@@ -1,0 +1,41 @@
+<!-- Path: verify-email.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Verify Email</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="glass-card auth-card" style="text-align: center;">
+            <i class="fas fa-envelope-open-text auth-icon" style="width: 80px; height: 80px; font-size: 2.8rem;"></i>
+            <h2>Check Your Email</h2>
+            <p style="color: var(--text-gray); margin: 16px 0;">
+                We sent a verification link to <b id="verifyEmailAddr" style="color: var(--text-white);">your email</b>.
+                Click it to activate your Sky Chat account.
+            </p>
+
+            <div id="verifyNotice" class="status-msg success-msg" style="text-align: left;">
+                Check your <b>Spam folder</b> if you don't see it!
+            </div>
+
+            <button id="checkVerifiedBtn" class="btn btn-primary" style="margin-top: 16px;">
+                <span class="btn-label">I've verified, continue</span>
+            </button>
+            <button id="resendBtn" class="btn btn-outline" style="margin-top: 10px;">
+                <span class="btn-label">Resend Email</span>
+            </button>
+
+            <p style="margin-top: 20px;">
+                <a href="#" id="logoutLink" style="color: var(--text-gray); text-decoration: none; font-size: 0.88rem;">Back to Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

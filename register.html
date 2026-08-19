@@ -1,0 +1,78 @@
+<!-- Path: register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Register</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="glass-card auth-card">
+            <div class="auth-header">
+                <i class="fas fa-user-plus auth-icon"></i>
+                <h2>Join Sky Chat</h2>
+                <p>Create your free account</p>
+            </div>
+
+            <div id="notice" class="status-msg hidden"></div>
+
+            <form id="regForm" novalidate>
+                <div class="field-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-at field-icon"></i>
+                        <input type="text" id="username" placeholder="e.g. cloud_runner" autocomplete="username" minlength="3" maxlength="20" required>
+                    </div>
+                    <div class="field-hint" id="usernameHint">3-20 characters, letters/numbers/underscore</div>
+                </div>
+
+                <div class="field-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-envelope field-icon"></i>
+                        <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+                    <div class="field-hint" id="emailHint"></div>
+                </div>
+
+                <div class="field-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock field-icon"></i>
+                        <input type="password" id="password" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required>
+                        <button type="button" class="toggle-pass" data-target="password"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <div class="strength-meter" id="strengthMeter">
+                        <div></div><div></div><div></div>
+                    </div>
+                    <div class="field-hint" id="passwordHint"></div>
+                </div>
+
+                <div class="field-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock field-icon"></i>
+                        <input type="password" id="confirmPassword" placeholder="Re-enter your password" autocomplete="new-password" required>
+                        <button type="button" class="toggle-pass" data-target="confirmPassword"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <div class="field-hint" id="confirmHint"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="regSubmitBtn" style="margin-top: 10px;">
+                    <span class="btn-label">Sign Up</span>
+                </button>
+            </form>
+
+            <div class="auth-footer-link">
+                Already a member? <a href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

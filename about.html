@@ -1,0 +1,85 @@
+<!-- Path: about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | About</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .about-hero { text-align: center; padding: 30px 0 10px; }
+        .about-hero i { font-size: 2.6rem; color: var(--accent); filter: drop-shadow(0 0 20px var(--accent-glow)); }
+        .about-hero h2 { margin: 14px 0 4px; }
+        .about-hero p { color: var(--text-gray); font-size: 0.9rem; margin: 0; }
+
+        .feature-row {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 16px; border-bottom: 1px solid var(--border-subtle);
+        }
+        .feature-row:last-child { border-bottom: none; }
+        .feature-row i {
+            width: 38px; height: 38px; border-radius: 50%; background: var(--bg-input);
+            display: flex; align-items: center; justify-content: center; color: var(--accent);
+            flex-shrink: 0; font-size: 0.95rem;
+        }
+        .feature-row h5 { margin: 0 0 3px 0; font-size: 0.92rem; }
+        .feature-row p { margin: 0; color: var(--text-gray); font-size: 0.82rem; line-height: 1.4; }
+
+        .meta-row {
+            display: flex; justify-content: space-between; padding: 12px 0;
+            border-bottom: 1px solid var(--border-subtle); font-size: 0.88rem;
+        }
+        .meta-row:last-child { border-bottom: none; }
+        .meta-row span:first-child { color: var(--text-gray); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="padding: 20px 0;">
+            <a href="settings.html" style="color: var(--accent); text-decoration: none;"><i class="fas fa-arrow-left"></i> Settings</a>
+        </header>
+
+        <div class="about-hero">
+            <i class="fas fa-cloud-moon"></i>
+            <h2>Sky Chat</h2>
+            <p>A modern way to connect with friends.</p>
+        </div>
+
+        <div class="glass-card" style="padding: 0; margin-top: 24px; overflow: hidden;">
+            <div class="feature-row">
+                <i class="fas fa-globe"></i>
+                <div><h5>Global Chat</h5><p>Talk to everyone in one shared room, in real time.</p></div>
+            </div>
+            <div class="feature-row">
+                <i class="fas fa-envelope"></i>
+                <div><h5>Private Messages</h5><p>One-on-one conversations with your friends.</p></div>
+            </div>
+            <div class="feature-row">
+                <i class="fas fa-user-friends"></i>
+                <div><h5>Friends & Requests</h5><p>Find people in Discover, send requests, and build your friend list.</p></div>
+            </div>
+            <div class="feature-row">
+                <i class="fas fa-circle" style="color: var(--success);"></i>
+                <div><h5>Online Status</h5><p>See who's around right now with live status dots.</p></div>
+            </div>
+            <div class="feature-row">
+                <i class="fas fa-bell"></i>
+                <div><h5>Notifications</h5><p>Get notified about friend requests and updates in one place.</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card" style="margin-top: 20px;">
+            <div class="meta-row"><span>Version</span><span>1.0.0</span></div>
+            <div class="meta-row"><span>Built with</span><span>Firebase + JavaScript</span></div>
+            <div class="meta-row"><span>Privacy Policy</span><a href="privacy.html" style="color: var(--accent); text-decoration: none;">View</a></div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-gray); font-size: 0.78rem; margin: 24px 0;">
+            Made with <i class="fas fa-heart" style="color: var(--error);"></i> for the Sky Chat community.
+        </p>
+    </div>
+
+    <script type="module" src="js/presence.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!-- Path: report.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Report User</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card" style="max-width: 400px; margin: 50px auto;">
+            <h3>Report User</h3>
+            <p style="color:var(--text-gray); font-size:0.8rem; margin-bottom:15px;">Why are you reporting this user?</p>
+            <textarea id="reportReason" placeholder="Describe the issue..." style="width:100%; height:100px; background:#1c222d; color:white; border-radius:8px; padding:10px; border:1px solid #333;"></textarea>
+            <button id="sendReport" class="btn btn-primary" style="margin-top:15px;">Submit Report</button>
+        </div>
+    </div>
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
+        const name = urlParams.get('name');
+
+        document.getElementById('sendReport').onclick = async () => {
+            const reason = document.getElementById('reportReason').value;
+            await addDoc(collection(db, "reports"), {
+                reportedUid: uid,
+                reportedUser: name,
+                reason: reason,
+                timestamp: new Date()
+            });
+            alert("Report sent to moderators.");
+            window.location.href = "home.html";
+        };
+    </script>
+</body>
+</html>
