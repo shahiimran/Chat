@@ -1,0 +1,52 @@
+<!-- Path: moderator/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Chat | Moderator</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <!-- Password Gate (UI convenience only — see note near checkModPass below) -->
+    <div id="modGate" class="auth-container" style="background: var(--bg-dark); position: fixed; z-index: 999; width: 100%; height: 100%;">
+        <div class="glass-card" style="width: 100%; max-width: 300px; text-align: center;">
+            <h3>Moderator Access</h3>
+            <input type="password" id="modPassInput" placeholder="Enter Mod Code">
+            <button onclick="checkModPass()" class="btn btn-primary">Enter</button>
+            <p id="modGateErr" style="color: var(--error); margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <div class="admin-grid">
+        <aside class="admin-sidebar">
+            <h2 style="color: var(--accent);">MOD PANEL</h2>
+            <hr style="border: 0.5px solid #333; margin: 20px 0;">
+            <a href="dashboard.html" class="btn btn-primary" style="margin-bottom: 10px;">Reports</a>
+            <a href="../home.html" class="btn btn-outline" style="color:white; border-color:#333;">Exit Panel</a>
+        </aside>
+
+        <main style="padding: 30px; overflow-y: auto;">
+            <h1>User Reports</h1>
+            <div id="reportsContainer" class="admin-card">
+                <p>Loading reports...</p>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="../js/moderator.js"></script>
+    <script>
+        // NOTE: UI convenience gate only, visible via page source — NOT real
+        // security. Actual access control happens in js/moderator.js
+        // (requireRole) and must be backed by Firestore Security Rules.
+        function checkModPass() {
+            const pass = document.getElementById('modPassInput').value;
+            if(pass === "123qwe") {
+                document.getElementById('modGate').style.display = 'none';
+            } else {
+                document.getElementById('modGateErr').innerText = "Wrong Code!";
+            }
+        }
+    </script>
+</body>
+</html>
